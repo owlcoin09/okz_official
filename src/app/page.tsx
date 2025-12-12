@@ -15,8 +15,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import { Speed, Security, TrendingUp, Analytics, Support, AccountBalance, People, AccountBalanceWallet, BarChart, TrendingUp as TrendingUpIcon, WorkspacePremium, Shield, Verified } from '@mui/icons-material';
+import StructuredData from '@/components/StructuredData';
+import { useTranslation } from '@/hooks/useTranslation';
+import { useLanguageStore } from '@/store/languageStore';
 
 export default function Home() {
+  const t = useTranslation();
+  const { locale } = useLanguageStore();
   const [showStats, setShowStats] = useState(false);
   const [showQuote, setShowQuote] = useState(false);
   const [showFeatures, setShowFeatures] = useState(false);
@@ -51,57 +56,99 @@ export default function Home() {
   const features = [
     {
       icon: <Speed sx={{ fontSize: 50 }} />,
-      title: '智能策略',
-      description: '50+种经过市场验证的量化策略，自动执行交易，24小时不间断运行',
+      title: t.home.features.smartStrategy.title,
+      description: t.home.features.smartStrategy.description,
       color: '#1976d2',
       image: '/images/feature-1.jpg',
     },
     {
       icon: <Security sx={{ fontSize: 50 }} />,
-      title: '安全可靠',
-      description: '采用银行级安全标准，多重加密保护，全方位保障您的资产和交易安全',
+      title: t.home.features.security.title,
+      description: t.home.features.security.description,
       color: '#2e7d32',
       image: '/images/feature-2.jpg',
     },
     {
       icon: <TrendingUp sx={{ fontSize: 50 }} />,
-      title: '稳定收益',
-      description: '年化收益率稳定在20%以上，累计管理资产超过10亿美元',
+      title: t.home.features.stableReturns.title,
+      description: t.home.features.stableReturns.description,
       color: '#ed6c02',
       image: '/images/feature-3.jpg',
     },
     {
       icon: <Analytics sx={{ fontSize: 50 }} />,
-      title: '数据分析',
-      description: '实时查看交易数据、收益统计和策略表现，专业的数据分析报告',
+      title: t.home.features.dataAnalysis.title,
+      description: t.home.features.dataAnalysis.description,
       color: '#9c27b0',
       image: '/images/feature-1.jpg',
     },
     {
       icon: <Support sx={{ fontSize: 50 }} />,
-      title: '专业服务',
-      description: '7x24小时专业客服支持，快速响应，及时解决您的问题',
+      title: t.home.features.professionalService.title,
+      description: t.home.features.professionalService.description,
       color: '#0288d1',
       image: '/images/feature-2.jpg',
     },
     {
       icon: <AccountBalance sx={{ fontSize: 50 }} />,
-      title: '便捷管理',
-      description: '多账户统一管理，资金划转便捷，完善的账户权限管理',
+      title: t.home.features.convenientManagement.title,
+      description: t.home.features.convenientManagement.description,
       color: '#c2185b',
       image: '/images/feature-3.jpg',
     },
   ];
 
   const stats = [
-    { label: '累计用户', value: '100,000+', desc: '全球用户信赖', icon: <People sx={{ fontSize: { xs: 40, md: 60 }, color: 'white' }} /> },
-    { label: '管理资产', value: '$10亿+', desc: '专业资产管理', icon: <AccountBalanceWallet sx={{ fontSize: { xs: 40, md: 60 }, color: 'white' }} /> },
-    { label: '交易策略', value: '50+', desc: '多样化策略选择', icon: <BarChart sx={{ fontSize: { xs: 40, md: 60 }, color: 'white' }} /> },
-    { label: '年化收益', value: '25%', desc: '平均收益率', icon: <TrendingUpIcon sx={{ fontSize: { xs: 40, md: 60 }, color: 'white' }} /> },
+    { label: t.home.stats.users, value: '100,000+', desc: t.home.stats.usersDesc, icon: <People sx={{ fontSize: { xs: 40, md: 60 }, color: 'white' }} /> },
+    { label: t.home.stats.assets, value: locale === 'zh' ? '$10亿+' : '$1B+', desc: t.home.stats.assetsDesc, icon: <AccountBalanceWallet sx={{ fontSize: { xs: 40, md: 60 }, color: 'white' }} /> },
+    { label: t.home.stats.strategies, value: '50+', desc: t.home.stats.strategiesDesc, icon: <BarChart sx={{ fontSize: { xs: 40, md: 60 }, color: 'white' }} /> },
+    { label: t.home.stats.returns, value: '25%', desc: t.home.stats.returnsDesc, icon: <TrendingUpIcon sx={{ fontSize: { xs: 40, md: 60 }, color: 'white' }} /> },
   ];
+
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FinancialService',
+    name: 'OKZ量化交易平台',
+    description: '专业的量化交易平台，基于OKX交易所提供安全、高效、智能的量化交易解决方案',
+    url: 'https://www.okzquant.com',
+    logo: 'https://www.okzquant.com/okz-logo.svg',
+    image: 'https://www.okzquant.com/images/hero-main.jpg',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'CN',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: '10000',
+    },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'USDT',
+      price: '1000',
+      description: '量化交易策略服务',
+    },
+  };
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'OKZ量化交易平台',
+    url: 'https://www.okzquant.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://www.okzquant.com/search?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
 
   return (
     <Box sx={{ bgcolor: '#f5f7fa', minHeight: '100vh' }}>
+      <StructuredData data={organizationSchema} />
+      <StructuredData data={websiteSchema} />
       <Navigation />
 
       {/* Hero Section + Status - 合并为一个背景 */}
@@ -129,7 +176,7 @@ export default function Home() {
         >
           <Image
             src="/images/hero-main.jpg"
-            alt="Background"
+            alt="OKZ量化交易平台 - 专业的量化交易解决方案"
             fill
             style={{ objectFit: 'cover' }}
             priority
@@ -149,7 +196,7 @@ export default function Home() {
                     fontWeight="bold"
                     sx={{ fontSize: { xs: '2rem', md: '3rem' } }}
                   >
-                    专业的量化交易平台
+                    {t.home.heroTitle}
                   </Typography>
                   <Typography
                     variant="h5"
@@ -161,13 +208,13 @@ export default function Home() {
                       lineHeight: 1.6,
                     }}
                   >
-                    基于 OKX 交易所，为您提供安全、高效、智能的量化交易解决方案
+                    {t.home.heroSubtitle}
                   </Typography>
                   <Typography
                     variant="body1"
                     sx={{ mt: 2, mb: 4, opacity: 0.9, fontSize: { xs: '0.9rem', md: '1rem' } }}
                   >
-                    10年+行业经验 | 银行级安全标准 | 7x24小时稳定运行
+                    {t.home.heroDescription}
                   </Typography>
                   <Stack
                     direction={{ xs: 'column', sm: 'row' }}
@@ -190,7 +237,7 @@ export default function Home() {
                         transition: 'all 0.3s',
                       }}
                     >
-                      查看策略
+                      {t.home.viewStrategies}
                     </Button>
                     <Button
                       variant="outlined"
@@ -213,7 +260,7 @@ export default function Home() {
                         transition: 'all 0.3s',
                       }}
                     >
-                      了解更多
+                      {t.home.learnMore}
                     </Button>
                   </Stack>
                 </Box>
@@ -230,7 +277,7 @@ export default function Home() {
                 >
                   <Image
                     src="/images/hero-main.jpg"
-                    alt="量化交易"
+                    alt="OKZ量化交易平台 - 智能自动化交易系统"
                     fill
                     style={{ objectFit: 'cover' }}
                   />
@@ -316,7 +363,7 @@ export default function Home() {
         >
           <Image
             src="/images/chart-bg.jpg"
-            alt="Chart Background"
+            alt="实时市场行情图表 - OKX交易所加密货币价格走势"
             fill
             style={{ objectFit: 'cover' }}
           />
@@ -389,7 +436,7 @@ export default function Home() {
         >
           <Image
             src="/images/feature-1.jpg"
-            alt="Feature Background"
+            alt="OKZ量化交易核心特性 - 智能策略和数据分析"
             fill
             style={{ objectFit: 'cover' }}
           />
@@ -456,7 +503,7 @@ export default function Home() {
                   >
                     <Image
                       src={feature.image}
-                      alt={feature.title}
+                      alt={`${feature.title} - ${feature.description}`}
                       fill
                       style={{ objectFit: 'cover', opacity: 0.3 }}
                     />
@@ -521,7 +568,7 @@ export default function Home() {
         >
           <Image
             src="/images/team.jpg"
-            alt="Team Background"
+            alt="OKZ专业团队 - 10年+量化交易经验的专家团队"
             fill
             style={{ objectFit: 'cover' }}
           />

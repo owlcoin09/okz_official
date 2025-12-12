@@ -10,16 +10,22 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { useLanguageStore } from '@/store/languageStore';
+import { getTranslation } from '@/i18n/translations';
+import LanguageSwitcher from './LanguageSwitcher';
+import OKZIcon from './OKZIcon';
 
 export default function Navigation() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { locale } = useLanguageStore();
+  const t = getTranslation(locale);
 
   const navItems = [
-    { label: '首页', href: '/' },
-    { label: '市场价格', href: '/markets' },
-    { label: '解决方案', href: '/solutions' },
-    { label: '关于我们', href: '/about' },
+    { label: t.nav.home, href: '/' },
+    { label: t.nav.markets, href: '/markets' },
+    { label: t.nav.solutions, href: '/solutions' },
+    { label: t.nav.about, href: '/about' },
   ];
 
   const handleDrawerToggle = () => {
@@ -28,9 +34,12 @@ export default function Navigation() {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', width: 250 }}>
-      <Typography variant="h6" sx={{ my: 2, fontWeight: 'bold' }}>
-        OKZ 量化交易平台
-      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 2, gap: 1 }}>
+        <OKZIcon width={32} height={32} />
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+          OKZ {locale === 'zh' ? '量化交易平台' : 'Quantitative Trading Platform'}
+        </Typography>
+      </Box>
       <List>
         {navItems.map((item) => (
           <ListItem key={item.href} disablePadding>
@@ -61,7 +70,7 @@ export default function Navigation() {
             rel="noopener noreferrer"
             sx={{ textAlign: 'center' }}
           >
-            <ListItemText primary="登录" />
+            <ListItemText primary={t.nav.login} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -72,8 +81,13 @@ export default function Navigation() {
             rel="noopener noreferrer"
             sx={{ textAlign: 'center' }}
           >
-            <ListItemText primary="注册" />
+            <ListItemText primary={t.nav.register} />
           </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <Box sx={{ px: 2, py: 1, width: '100%' }}>
+            <LanguageSwitcher />
+          </Box>
         </ListItem>
       </List>
     </Box>
@@ -98,21 +112,30 @@ export default function Navigation() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
+          <Box
             component={Link}
             href="/"
             sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
               flexGrow: 0,
               mr: { xs: 2, md: 4 },
-              fontWeight: 'bold',
               textDecoration: 'none',
               color: 'inherit',
-              fontSize: { xs: '1rem', md: '1.25rem' },
             }}
           >
-            OKZ 量化交易平台
-          </Typography>
+            <OKZIcon width={32} height={32} />
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 'bold',
+                fontSize: { xs: '1rem', md: '1.25rem' },
+              }}
+            >
+              OKZ {locale === 'zh' ? '量化交易平台' : 'Quantitative Trading Platform'}
+            </Typography>
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
             {navItems.map((item) => (
               <Button
@@ -130,7 +153,8 @@ export default function Navigation() {
               </Button>
             ))}
           </Box>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, alignItems: 'center' }}>
+            <LanguageSwitcher />
             <Button 
               color="inherit" 
               component="a"
@@ -138,7 +162,7 @@ export default function Navigation() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              登录
+              {t.nav.login}
             </Button>
             <Button
               color="inherit"
@@ -149,7 +173,7 @@ export default function Navigation() {
               variant="outlined"
               sx={{ ml: 1, borderColor: 'rgba(255,255,255,0.5)' }}
             >
-              注册
+              {t.nav.register}
             </Button>
           </Box>
         </Toolbar>

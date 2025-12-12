@@ -323,7 +323,7 @@ export default function AboutPage() {
         >
           <Image
             src="/images/about-company.jpg"
-            alt="Background"
+            alt="OKZ公司介绍 - 专业的量化交易平台"
             fill
             style={{ objectFit: 'cover' }}
             priority
@@ -438,7 +438,7 @@ export default function AboutPage() {
                       >
                         <Image
                           src="/images/team.jpg"
-                          alt="Team"
+                          alt="OKZ专业团队 - 量化交易专家和技术团队"
                           fill
                           style={{ objectFit: 'cover' }}
                         />

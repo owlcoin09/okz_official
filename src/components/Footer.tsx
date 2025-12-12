@@ -18,8 +18,12 @@ import {
   LinkedIn,
   GitHub,
 } from '@mui/icons-material';
+import { useLanguageStore } from '@/store/languageStore';
+import { getTranslation } from '@/i18n/translations';
 
 export default function Footer() {
+  const { locale } = useLanguageStore();
+  const t = getTranslation(locale);
   return (
     <Box
       component="footer"
@@ -39,10 +43,10 @@ export default function Footer() {
               gutterBottom
               sx={{ color: 'white', fontWeight: 'bold', mb: 3 }}
             >
-              OKZ 量化交易
+              {t.footer.company}
             </Typography>
             <Typography variant="body2" paragraph sx={{ lineHeight: 1.8, mb: 2 }}>
-              专业的量化交易平台，基于 OKX 交易所，为全球投资者提供安全、高效、智能的量化交易解决方案。
+              {t.footer.description}
             </Typography>
             <Stack direction="row" spacing={2}>
               <Link
@@ -95,7 +99,7 @@ export default function Footer() {
               gutterBottom
               sx={{ color: 'white', fontWeight: 'bold', mb: 3 }}
             >
-              产品服务
+              {t.footer.products}
             </Typography>
             <Stack spacing={1.5}>
               <Link
@@ -107,7 +111,7 @@ export default function Footer() {
                   transition: 'color 0.3s',
                 }}
               >
-                量化策略
+                {t.footer.quantStrategy}
               </Link>
               <Link
                 href="/services"
@@ -118,7 +122,7 @@ export default function Footer() {
                   transition: 'color 0.3s',
                 }}
               >
-                数据分析
+                {t.footer.dataAnalysis}
               </Link>
               <Link
                 href="/services"
@@ -129,7 +133,7 @@ export default function Footer() {
                   transition: 'color 0.3s',
                 }}
               >
-                API 接口
+                {t.footer.api}
               </Link>
               <Link
                 href="/services"
@@ -140,7 +144,7 @@ export default function Footer() {
                   transition: 'color 0.3s',
                 }}
               >
-                账户管理
+                {t.footer.accountManagement}
               </Link>
             </Stack>
           </Grid>
@@ -152,7 +156,7 @@ export default function Footer() {
               gutterBottom
               sx={{ color: 'white', fontWeight: 'bold', mb: 3 }}
             >
-              关于我们
+              {t.footer.about}
             </Typography>
             <Stack spacing={1.5}>
               <Link
@@ -164,7 +168,7 @@ export default function Footer() {
                   transition: 'color 0.3s',
                 }}
               >
-                公司简介
+                {t.footer.companyIntro}
               </Link>
               <Link
                 href="/about"
@@ -175,7 +179,7 @@ export default function Footer() {
                   transition: 'color 0.3s',
                 }}
               >
-                发展历程
+                {t.footer.history}
               </Link>
               <Link
                 href="/about"
@@ -186,7 +190,7 @@ export default function Footer() {
                   transition: 'color 0.3s',
                 }}
               >
-                荣誉资质
+                {t.footer.honors}
               </Link>
               <Link
                 href="/about"
@@ -197,7 +201,7 @@ export default function Footer() {
                   transition: 'color 0.3s',
                 }}
               >
-                隐私政策
+                {t.footer.privacyPolicy}
               </Link>
             </Stack>
           </Grid>
@@ -209,13 +213,13 @@ export default function Footer() {
               gutterBottom
               sx={{ color: 'white', fontWeight: 'bold', mb: 3 }}
             >
-              联系我们
+              {t.footer.contact}
             </Typography>
             <Stack spacing={2}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Email sx={{ fontSize: 20, color: 'primary.main' }} />
                 <Link
-                  href="mailto:support@okz.com"
+                  href={`mailto:${t.footer.email}`}
                   sx={{
                     color: 'rgba(255, 255, 255, 0.6)',
                     textDecoration: 'none',
@@ -223,13 +227,13 @@ export default function Footer() {
                     transition: 'color 0.3s',
                   }}
                 >
-                  support@okz.com
+                  {t.footer.email}
                 </Link>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Phone sx={{ fontSize: 20, color: 'primary.main' }} />
                 <Link
-                  href="tel:+86-400-888-8888"
+                  href={`tel:+86-${t.footer.phone.replace(/-/g, '')}`}
                   sx={{
                     color: 'rgba(255, 255, 255, 0.6)',
                     textDecoration: 'none',
@@ -237,15 +241,13 @@ export default function Footer() {
                     transition: 'color 0.3s',
                   }}
                 >
-                  400-888-8888
+                  {t.footer.phone}
                 </Link>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'start', gap: 1.5 }}>
                 <LocationOn sx={{ fontSize: 20, color: 'primary.main', mt: 0.5 }} />
-                <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.6)', lineHeight: 1.6 }}>
-                  北京市朝阳区
-                  <br />
-                  金融科技大厦
+                <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.6)', lineHeight: 1.6, whiteSpace: 'pre-line' }}>
+                  {t.footer.address}
                 </Typography>
               </Box>
             </Stack>
@@ -264,7 +266,7 @@ export default function Footer() {
           }}
         >
           <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.5)' }}>
-            © 2024 OKZ 量化交易平台. 保留所有权利.
+            {t.footer.copyright}
           </Typography>
           <Box sx={{ display: 'flex', gap: 3 }}>
             <Link
@@ -277,7 +279,7 @@ export default function Footer() {
                 transition: 'color 0.3s',
               }}
             >
-              用户协议
+              {t.footer.userAgreement}
             </Link>
             <Link
               href="/policies"
@@ -289,7 +291,7 @@ export default function Footer() {
                 transition: 'color 0.3s',
               }}
             >
-              隐私政策
+              {t.footer.privacyPolicy}
             </Link>
             <Link
               href="/policies"
@@ -301,7 +303,7 @@ export default function Footer() {
                 transition: 'color 0.3s',
               }}
             >
-              风险提示
+              {t.footer.riskWarning}
             </Link>
           </Box>
         </Box>
