@@ -104,7 +104,7 @@ export default function AboutPage() {
       content: (
         <Box>
           <Typography variant="h6" gutterBottom>1. 协议范围</Typography>
-          <Typography variant="body2" >
+          <Typography variant="body2" paragraph>
             本协议是您与 OKZ 量化交易平台（以下简称&ldquo;平台&rdquo;）之间关于使用平台服务的法律协议。
             通过访问或使用平台服务，您同意接受并遵守本协议的所有条款和条件。
           </Typography>
