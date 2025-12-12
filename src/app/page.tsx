@@ -733,8 +733,10 @@ export default function Home() {
               <Button
                 variant="contained"
                 size="large"
-                component={Link}
-                href="/register"
+                component="a"
+                href="https://okz.okzquant.com/register"
+                target="_blank"
+                rel="noopener noreferrer"
                 sx={{
                   bgcolor: 'white',
                   color: 'primary.main',
