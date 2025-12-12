@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://okz.okzquant.com';
+  const baseUrl = 'https://www.okzquant.com';
   
   // 静态页面路由
   const staticRoutes = [

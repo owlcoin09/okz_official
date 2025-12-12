@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next';
 export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://okz.okzquant.com';
+  const baseUrl = 'https://www.okzquant.com';
   
   return {
     rules: [
