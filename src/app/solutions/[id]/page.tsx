@@ -5,7 +5,6 @@ import {
   Container,
   Typography,
   Box,
-  Grid,
   Card,
   CardContent,
   Paper,
@@ -26,6 +25,7 @@ import {
   DialogActions,
   Stack,
 } from '@mui/material';
+import { GridLegacy as Grid } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import ReactECharts from 'echarts-for-react';

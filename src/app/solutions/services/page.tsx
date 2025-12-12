@@ -3,7 +3,6 @@
 import {
   Typography,
   Box,
-  Grid,
   Card,
   CardContent,
   Paper,
@@ -13,6 +12,7 @@ import {
   ListItemText,
   Chip,
 } from '@mui/material';
+import { GridLegacy as Grid } from '@mui/material';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import {

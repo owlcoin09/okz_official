@@ -3,12 +3,12 @@
 import {
   Box,
   Container,
-  Grid,
   Typography,
   Link,
   Stack,
   Divider,
 } from '@mui/material';
+import { GridLegacy as Grid } from '@mui/material';
 import {
   Email,
   Phone,

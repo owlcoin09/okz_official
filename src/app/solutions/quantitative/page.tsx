@@ -5,7 +5,6 @@ import {
   Container,
   Typography,
   Box,
-  Grid,
   Card,
   CardContent,
   CardActions,
@@ -13,6 +12,7 @@ import {
   Button,
   Stack,
 } from '@mui/material';
+import { GridLegacy as Grid } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';

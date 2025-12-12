@@ -4,7 +4,6 @@ import {
   Container,
   Typography,
   Box,
-  Grid,
   Card,
   CardContent,
   CardActions,
@@ -12,6 +11,7 @@ import {
   Stack,
   Chip,
 } from '@mui/material';
+import { GridLegacy as Grid } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
@@ -91,7 +91,7 @@ const wealthStrategies = [
   },
 ];
 
-const riskColor = {
+const riskColor: Record<string, 'success' | 'warning' | 'error'> = {
   低: 'success',
   中: 'warning',
   高: 'error',

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import {
   Typography,
   Box,
-  Grid,
   Card,
   CardContent,
   Paper,
@@ -21,6 +20,7 @@ import {
   ListItemText,
   Divider,
 } from '@mui/material';
+import { GridLegacy as Grid } from '@mui/material';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import { TrendingUp, Security, Groups, EmojiEvents, Star } from '@mui/icons-material';
@@ -105,7 +105,7 @@ export default function AboutPage() {
         <Box>
           <Typography variant="h6" gutterBottom>1. 协议范围</Typography>
           <Typography variant="body2" paragraph>
-            本协议是您与 OKZ 量化交易平台（以下简称"平台"）之间关于使用平台服务的法律协议。
+            本协议是您与 OKZ 量化交易平台（以下简称&ldquo;平台&rdquo;）之间关于使用平台服务的法律协议。
             通过访问或使用平台服务，您同意接受并遵守本协议的所有条款和条件。
           </Typography>
           <Typography variant="h6" gutterBottom>2. 服务说明</Typography>
