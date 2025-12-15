@@ -20,7 +20,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     };
   }
 
-  return {
+  const { generateMetadata: generateMeta } = await import('@/lib/metadata');
+  
+  return generateMeta({
+    locale: 'zh',
+    page: 'solutions',
     title: `${strategy.name} - ${strategy.type}`,
     description: `${strategy.description}。${strategy.expectedReturn}，风险等级：${strategy.riskLevel}，最低投资：${strategy.minInvestment}。${strategy.details.substring(0, 100)}...`,
     keywords: [
@@ -31,16 +35,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       strategy.riskLevel + '风险',
       'OKX量化',
     ],
-    openGraph: {
-      title: `${strategy.name} - OKZ量化交易平台`,
-      description: `${strategy.description}。${strategy.expectedReturn}，风险等级：${strategy.riskLevel}。`,
-      url: `https://www.okzquant.com/solutions/${id}`,
-      images: [strategy.image],
-    },
-    alternates: {
-      canonical: `https://www.okzquant.com/solutions/${id}`,
-    },
-  };
+    url: `https://www.okzquant.com/solutions/${id}`,
+    image: strategy.image,
+  });
 }
 
 export default async function StrategyDetailPage({ params }: { params: Promise<{ id: string }> }) {

@@ -733,7 +733,7 @@ export default function AboutPage() {
                   最后更新时间：2024年12月
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                  如有疑问，请联系客服：support@okz.com
+                  如有疑问，请联系客服：support@okzquant.com
                 </Typography>
               </Box>
             </Paper>
