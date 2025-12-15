@@ -23,6 +23,7 @@ import {
 import { GridLegacy as Grid } from '@mui/material';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
+import DynamicMetadata from '@/components/DynamicMetadata';
 import { TrendingUp, Security, Groups, EmojiEvents, Star } from '@mui/icons-material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -298,6 +299,7 @@ export default function AboutPage() {
 
   return (
     <Box sx={{ bgcolor: 'rgba(25, 118, 210, 0.05)', minHeight: '100vh' }}>
+      <DynamicMetadata page="about" />
       <Navigation />
 
       <Box

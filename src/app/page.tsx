@@ -16,6 +16,7 @@ import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import { Speed, Security, TrendingUp, Analytics, Support, AccountBalance, People, AccountBalanceWallet, BarChart, TrendingUp as TrendingUpIcon, WorkspacePremium, Shield, Verified } from '@mui/icons-material';
 import StructuredData from '@/components/StructuredData';
+import DynamicMetadata from '@/components/DynamicMetadata';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useLanguageStore } from '@/store/languageStore';
 
@@ -105,50 +106,12 @@ export default function Home() {
     { label: t.home.stats.returns, value: '25%', desc: t.home.stats.returnsDesc, icon: <TrendingUpIcon sx={{ fontSize: { xs: 40, md: 60 }, color: 'white' }} /> },
   ];
 
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FinancialService',
-    name: 'OKZ量化交易平台',
-    description: '专业的量化交易平台，基于OKX交易所提供安全、高效、智能的量化交易解决方案',
-    url: 'https://www.okzquant.com',
-    logo: 'https://www.okzquant.com/okz-logo.svg',
-    image: 'https://www.okzquant.com/images/hero-main.jpg',
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'CN',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '10000',
-    },
-    offers: {
-      '@type': 'Offer',
-      priceCurrency: 'USDT',
-      price: '1000',
-      description: '量化交易策略服务',
-    },
-  };
-
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'OKZ量化交易平台',
-    url: 'https://www.okzquant.com',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://www.okzquant.com/search?q={search_term_string}',
-      },
-      'query-input': 'required name=search_term_string',
-    },
-  };
+  // 首页使用全局的 Organization 和 WebSite schema（已在 layout 中添加）
+  // 这里可以添加首页特定的结构化数据，如 FAQ 等
 
   return (
     <Box sx={{ bgcolor: '#f5f7fa', minHeight: '100vh' }}>
-      <StructuredData data={organizationSchema} />
-      <StructuredData data={websiteSchema} />
+      <DynamicMetadata page="home" />
       <Navigation />
 
       {/* Hero Section + Status - 合并为一个背景 */}

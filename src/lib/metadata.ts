@@ -32,7 +32,7 @@ interface GenerateMetadataOptions {
  */
 export function generateMetadata(options: GenerateMetadataOptions = {}): Metadata {
   const {
-    locale = 'zh',
+    locale = 'en', // 默认使用英文
     page = 'home',
     title,
     description,
@@ -84,7 +84,9 @@ export function generateMetadata(options: GenerateMetadataOptions = {}): Metadat
     },
     description: finalDescription,
     keywords: finalKeywords,
-    authors: authors || [{ name: 'OKZ Team' }],
+    authors: authors
+      ? authors.map(name => (typeof name === 'string' ? { name } : name))
+      : [{ name: 'OKZ Team' }],
     creator: 'OKZ',
     publisher: 'OKZ',
     formatDetection: {

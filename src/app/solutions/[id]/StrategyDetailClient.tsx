@@ -32,6 +32,10 @@ import Navigation from '@/components/Navigation';
 import { ArrowBack, CheckCircle, TrendingUp, Api, AccountBalanceWallet, Settings, BarChart } from '@mui/icons-material';
 import { useState } from 'react';
 import { TradingMethod, StrategyDetail } from './strategyData';
+import StructuredData from '@/components/StructuredData';
+import DynamicMetadata from '@/components/DynamicMetadata';
+import { generateProductSchema, generateBreadcrumbSchema } from '@/lib/jsonld';
+import { useLanguageStore } from '@/store/languageStore';
 
 const tradingMethodLabels: Record<TradingMethod, { label: string; icon: React.ReactNode; desc: string }> = {
   okx_token: {
@@ -63,12 +67,34 @@ interface StrategyDetailClientProps {
 export default function StrategyDetailClient({ strategy }: StrategyDetailClientProps) {
   const [selectedMethod, setSelectedMethod] = useState<TradingMethod | null>(null);
   const [backtestOpen, setBacktestOpen] = useState(false);
+  const { locale } = useLanguageStore();
 
   const riskColor = {
     低: 'success',
     中: 'warning',
     高: 'error',
   }[strategy.riskLevel] as 'success' | 'warning' | 'error';
+
+  // 生成产品结构化数据
+  const productSchema = generateProductSchema(
+    strategy.name,
+    strategy.description,
+    {
+      image: strategy.image,
+      price: strategy.minInvestment.replace(/[^0-9]/g, ''),
+      priceCurrency: 'USDT',
+      ratingValue: '4.8',
+      reviewCount: '1000',
+      locale: locale,
+    }
+  );
+
+  // 生成面包屑结构化数据
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: locale === 'zh' ? '首页' : 'Home', url: '/' },
+    { name: locale === 'zh' ? '量化策略' : 'Solutions', url: '/solutions' },
+    { name: strategy.name, url: `/solutions/${strategy.id}` },
+  ]);
 
   const chartOption = {
     title: {
@@ -130,6 +156,9 @@ export default function StrategyDetailClient({ strategy }: StrategyDetailClientP
 
   return (
     <Box sx={{ bgcolor: 'rgba(25, 118, 210, 0.05)', minHeight: '100vh' }}>
+      {/* JSON-LD 结构化数据 */}
+      <StructuredData data={[productSchema, breadcrumbSchema]} />
+      <DynamicMetadata page="solutions" />
       <Navigation />
 
       {/* Header */}

@@ -30,22 +30,31 @@ export default function LanguageProvider({
 
         if (!savedLocale) {
           // 检测浏览器语言
-          const browserLang = navigator.language.split('-')[0].toLowerCase();
+          // 优先使用 navigator.languages（支持多语言偏好列表）
+          const browserLanguages = navigator.languages || [navigator.language];
           const supportedLanguageCodes = languages.map(lang => lang.code);
           
-          // 检查是否支持浏览器语言
-          let detectedLocale = 'en'; // 默认使用英语
+          // 默认使用英语
+          let detectedLocale = 'en';
           
-          if (supportedLanguageCodes.includes(browserLang)) {
-            detectedLocale = browserLang;
-          } else {
-            // 尝试匹配完整语言代码（如 zh-CN）
-            const fullLang = navigator.language.toLowerCase();
+          // 遍历浏览器语言列表，找到第一个支持的语言
+          for (const browserLang of browserLanguages) {
+            // 尝试完整匹配（如 zh-CN）
+            const fullLang = browserLang.toLowerCase();
             const matchedLang = languages.find(lang => 
-              fullLang.startsWith(lang.code + '-') || fullLang === lang.code
+              fullLang === lang.code || fullLang.startsWith(lang.code + '-')
             );
+            
             if (matchedLang) {
               detectedLocale = matchedLang.code;
+              break;
+            }
+            
+            // 尝试基础语言代码匹配（如 zh）
+            const baseLang = browserLang.split('-')[0].toLowerCase();
+            if (supportedLanguageCodes.includes(baseLang)) {
+              detectedLocale = baseLang;
+              break;
             }
           }
           
@@ -63,7 +72,12 @@ export default function LanguageProvider({
   useEffect(() => {
     // 更新HTML lang属性
     if (typeof document !== 'undefined' && isInitialized) {
-      document.documentElement.lang = locale === 'zh' ? 'zh-CN' : locale;
+      // 将语言代码转换为标准的 HTML lang 属性格式
+      const htmlLang = locale === 'zh' ? 'zh-CN' : 
+                      locale === 'en' ? 'en-US' :
+                      locale === 'pt' ? 'pt-BR' :
+                      locale;
+      document.documentElement.lang = htmlLang;
     }
   }, [locale, isInitialized]);
 

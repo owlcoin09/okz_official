@@ -16,6 +16,7 @@ import {
 import { GridLegacy as Grid } from '@mui/material';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
+import DynamicMetadata from '@/components/DynamicMetadata';
 import {
   CheckCircle,
   Speed,
@@ -145,6 +146,7 @@ export default function ServicesPage() {
 
   return (
     <Box sx={{ bgcolor: '#fafafa', minHeight: '100vh' }}>
+      <DynamicMetadata page="services" />
       <Navigation />
       <Box
         sx={{

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { generateMetadata: generateMeta } = await import('@/lib/metadata');
   
   return generateMeta({
-    locale: 'zh',
+    locale: 'en',
     page: 'solutions',
     title: `${strategy.name} - ${strategy.type}`,
     description: `${strategy.description}。${strategy.expectedReturn}，风险等级：${strategy.riskLevel}，最低投资：${strategy.minInvestment}。${strategy.details.substring(0, 100)}...`,

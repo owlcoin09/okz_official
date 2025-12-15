@@ -21,6 +21,7 @@ import {
 } from '@mui/material';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
+import DynamicMetadata from '@/components/DynamicMetadata';
 import SearchIcon from '@mui/icons-material/Search';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
@@ -278,6 +279,7 @@ export default function MarketsPage() {
 
   return (
     <Box sx={{ bgcolor: 'rgba(25, 118, 210, 0.05)', minHeight: '100vh' }}>
+      <DynamicMetadata page="markets" />
       <Navigation />
 
       {/* Header */}

@@ -25,7 +25,7 @@ export const languages: Language[] = [
   { code: 'da', name: 'Danish', nativeName: 'Dansk', flag: '🇩🇰', country: 'Denmark' },
 ];
 
-export const defaultLanguage = 'zh';
+export const defaultLanguage = 'en';
 
 export function getLanguageByCode(code: string): Language | undefined {
   return languages.find(lang => lang.code === code);

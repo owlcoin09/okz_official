@@ -15,6 +15,7 @@ import { GridLegacy as Grid } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
+import DynamicMetadata from '@/components/DynamicMetadata';
 import { TrendingUp, People, ArrowForward } from '@mui/icons-material';
 
 // 量化策略示例数据（显示前3个）
@@ -100,6 +101,7 @@ const riskColor: Record<string, 'success' | 'warning' | 'error'> = {
 export default function SolutionsPage() {
   return (
     <Box sx={{ bgcolor: 'rgba(25, 118, 210, 0.05)', minHeight: '100vh' }}>
+      <DynamicMetadata page="solutions" />
       <Navigation />
 
       {/* Banner Section */}
