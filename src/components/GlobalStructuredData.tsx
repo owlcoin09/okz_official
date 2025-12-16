@@ -7,6 +7,7 @@ import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/jsonld'
 /**
  * 全局结构化数据组件
  * 在所有页面中显示，包含 Organization 和 WebSite schema
+ * WebSite schema 中包含 SiteNavigationElement（通过 hasPart 属性）
  */
 export default function GlobalStructuredData() {
   const { locale } = useLanguageStore();

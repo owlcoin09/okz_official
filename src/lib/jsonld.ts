@@ -2,6 +2,7 @@
 // 用于 SEO 优化，帮助搜索引擎更好地理解网站内容
 
 import { getMetadataTranslation } from '@/i18n/metadata';
+import { getTranslation } from '@/i18n/translations';
 
 const baseUrl = 'https://www.okzquant.com';
 
@@ -52,6 +53,11 @@ export interface WebSiteSchema {
     };
     'query-input': string;
   };
+  hasPart?: Array<{
+    '@type': string;
+    name: string;
+    url: string;
+  }>;
 }
 
 export interface BreadcrumbSchema {
@@ -124,6 +130,13 @@ export interface ServiceSchema {
   serviceType?: string;
 }
 
+export interface SiteNavigationElementSchema {
+  '@context': string;
+  '@type': string;
+  name: string;
+  url: string;
+}
+
 /**
  * 生成组织（Organization）结构化数据
  */
@@ -188,6 +201,14 @@ export function generateOrganizationSchema(locale: string = 'en'): OrganizationS
  */
 export function generateWebSiteSchema(locale: string = 'en'): WebSiteSchema {
   const meta = getMetadataTranslation(locale);
+  const t = getTranslation(locale);
+  
+  const navItems = [
+    { label: t.nav.home, href: '/' },
+    { label: t.nav.markets, href: '/markets' },
+    { label: t.nav.solutions, href: '/solutions' },
+    { label: t.nav.about, href: '/about' },
+  ];
   
   return {
     '@context': 'https://schema.org',
@@ -207,6 +228,11 @@ export function generateWebSiteSchema(locale: string = 'en'): WebSiteSchema {
       },
       'query-input': 'required name=search_term_string',
     },
+    hasPart: navItems.map(item => ({
+      '@type': 'SiteNavigationElement',
+      name: item.label,
+      url: item.href.startsWith('http') ? item.href : `${baseUrl}${item.href}`,
+    })),
   };
 }
 
@@ -406,5 +432,26 @@ export function generateFAQSchema(
       },
     })),
   };
+}
+
+/**
+ * 生成网站导航（SiteNavigationElement）结构化数据
+ */
+export function generateSiteNavigationElementSchema(locale: string = 'en'): SiteNavigationElementSchema[] {
+  const t = getTranslation(locale);
+  
+  const navItems = [
+    { label: t.nav.home, href: '/' },
+    { label: t.nav.markets, href: '/markets' },
+    { label: t.nav.solutions, href: '/solutions' },
+    { label: t.nav.about, href: '/about' },
+  ];
+  
+  return navItems.map(item => ({
+    '@context': 'https://schema.org',
+    '@type': 'SiteNavigationElement',
+    name: item.label,
+    url: item.href.startsWith('http') ? item.href : `${baseUrl}${item.href}`,
+  }));
 }
 
